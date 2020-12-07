@@ -7,31 +7,22 @@
             class="prompt"
             type="text"
             placeholder="Rechercher un utilisateur"
-            @input=""
+          />
           />
           <i class="search icon"></i>
         </div>
         <div class="results"></div>
       </div>
     </div>
-
-    
-
-    <div class="users">
-      <div class="user" v-for="user in users" :key="user.token">
-        <img :src=user.picture_url /><span
+  <ul>
+  <div class="users">
+      <div class="user" v-for="user in users" :key="user.username">
+        <img :src="user.picture_url" /><span
           class=""
-          >{{user.username}}</span
-        >
+          >{{ user.username }}</span>
       </div>
-      <div class="selected user">
-        <img src="https://source.unsplash.com/8wbxjJBrl3k/100x100" /><span
-          class=""
-          >Cha</span
-        >
-      </div>
-    </div>
-
+  </div>
+</ul>
     <div class="actions">
       <button class="ui primary big button" @click="openConversation">
         <i class="conversation icon"></i>
@@ -49,7 +40,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Community",
   data() {
-    
+    return {};
   },
   methods: {
     ...mapActions(["createOneToOneConversation"]),
@@ -68,3 +59,11 @@ export default {
 </script>
 
 <style src="./Community.css" scoped />
+
+      });
+    }
+  },
+  computed: {
+    ...mapGetters(["users"])
+  }
+};
