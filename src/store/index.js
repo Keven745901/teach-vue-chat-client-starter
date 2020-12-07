@@ -135,6 +135,25 @@ export default new Vuex.Store({
       });
 
       return promise;
+    },
+
+    createManyToManyConversation({ commit }, selectedUsers) {
+      const promise = Vue.prototype.$client.createManyToManyConversation(
+        selectedUsers
+      );
+
+      promise.then(({ conversation }) => {
+        // commit("upsertConversation", {
+        //   conversation
+        // });
+        console.log(conversation);
+        router.push({
+          name: "Conversation",
+          params: { id: conversation.id }
+        });
+      });
+
+      return promise;
     }
   }
 });

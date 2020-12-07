@@ -46,7 +46,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["createOneToOneConversation"]),
+    ...mapActions(["createOneToOneConversation","createManyToManyConversation"]),
 
     openConversation() {
       let promise;
