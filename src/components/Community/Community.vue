@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="users">
-      <div class="user" v-for="user in filteredUsers" :key="user.token" @click="">
+      <div class="user" v-for="user in filteredUsers" :key="user.token" :class="{ selected: selectedUsers.includes(user.username) ? true : false }" @click="toggleSelected(user.username)">
         <img :src="user.picture_url" /><span
           class=""
           >{{ user.username }}</span
@@ -54,7 +54,21 @@ export default {
       promise.finally(() => {
         console.log("Conversation ouverte !");
       });
-    }
+    },
+     toggleSelected(username) {
+      console.log(this.selectedUsers);
+      if(!this.selectedUsers.includes(username)){
+        this.selectedUsers.push(username);
+        this.isSelected = true;
+      }
+      else{
+        var index = this.selectedUsers.indexOf(username);
+        if(index > -1){
+          this.selectedUsers.splice(index, 1);
+        }
+      }
+    },
+
   },
   computed: {
     ...mapGetters(["users"]),
@@ -70,7 +84,6 @@ export default {
       }
     return u
     },
-
   }
 };
 </script>
