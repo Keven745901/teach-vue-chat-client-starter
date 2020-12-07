@@ -43,22 +43,20 @@
     </div>
     <div class="conversations">
       <div
-      v-for="c in conversations" :key="c.id"
+      v-for="c in listeConversations" :key="c.id"
         class="conversation selected"
         :title="c.title"
-        @click="openConversation(0)"
+        @click="openConversation(c.id)"
       >
         <a class="avatar">
           <img src="https://source.unsplash.com/FUcupae92P4/100x100" />
         </a>
         <div class="content">
-         <div class="metadata">
-            <div>{{c.participants}}</div>
-            <div>{{c.updated_at}}</div>
-            <div>{{c.message}}</div>
-            <span class="time">01:48:00</span>
+          <div class="metadata">
+            <div class="title">{{(c.participants)}}</div>
+            <span class="time">{{c.updated_at}}</span>
           </div>
-          <div class="text">Nouvelle conversation</div>
+          <div class="text">{{c.message}}</div>
         </div>
       </div>
     </div>
@@ -73,6 +71,8 @@ export default {
   name: "Sidebar",
   data() {
     return {
+      search: "",
+      nomsConversation: [],
       search: ""
     };
   },
@@ -89,10 +89,25 @@ export default {
     },
     openConversation(id) {
       router.push({ name: "Conversation", params: { id } });
+    },
+    addnomConversation(conversation){
+      var nomConversation="";
+      conversation.participants.forEach(element => {
+        nomConversation=nomConversation+element+"";
+      });
+      this.nomsConversation.push(nomConversation);
     }
   },
   computed: {
-    ...mapGetters(["user", "conversations"])
+    ...mapGetters(["user", "conversations"]),
+    listeConversations: function(){
+      var convs = [];
+      this.conversations.forEach(element => {
+        convs.push({ updated_at: element.updated_at.substring(11, 19), id: element.id, participants: element.participants[0] + ", " + element.participants[1], message: element.message });
+      });
+
+      return convs;
+    }
   }
 };
 </script>

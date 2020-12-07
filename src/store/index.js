@@ -153,9 +153,9 @@ export default new Vuex.Store({
       );
 
       promise.then(({ conversation }) => {
-        // commit("upsertConversation", {
-        //   conversation
-        // });
+        commit("upsertConversation", {
+          conversation
+        });
         console.log(conversation);
         router.push({
           name: "Conversation",
