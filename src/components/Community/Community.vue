@@ -27,7 +27,7 @@
       <button class="ui primary big button" @click="openConversation">
         <i class="conversation icon"></i>
         <span>
-          Ouvrir la conversation (2)
+          Ouvrir la conversation
         </span>
       </button>
     </div>
@@ -49,12 +49,23 @@ export default {
     ...mapActions(["createOneToOneConversation"]),
 
     openConversation() {
-      let promise = this.createOneToOneConversation("Alice");
+      let promise;
+      console.log(this.selectedUsers)
+      if(this.selectedUsers.length>1)
+      {
+        promise=this.createManyToManyConversation(this.selectedUsers);
+      }
+      else
+      {
+         promise=this.createOneToOneConversation(this.selectedUsers[0]);
+      }
+      
 
       promise.finally(() => {
         console.log("Conversation ouverte !");
       });
     },
+
      toggleSelected(username) {
       console.log(this.selectedUsers);
       if(!this.selectedUsers.includes(username)){
