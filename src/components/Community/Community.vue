@@ -7,22 +7,22 @@
             class="prompt"
             type="text"
             placeholder="Rechercher un utilisateur"
-          />
+            v-model="search"
           />
           <i class="search icon"></i>
         </div>
         <div class="results"></div>
       </div>
     </div>
-  <ul>
-  <div class="users">
-      <div class="user" v-for="user in users" :key="user.username">
+    <div class="users">
+      <div class="user" v-for="user in filteredUsers" :key="user.token">
         <img :src="user.picture_url" /><span
           class=""
-          >{{ user.username }}</span>
+          >{{ user.username }}</span
+        >
       </div>
-  </div>
-</ul>
+    </div>
+
     <div class="actions">
       <button class="ui primary big button" @click="openConversation">
         <i class="conversation icon"></i>
@@ -40,10 +40,13 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Community",
   data() {
-    return {};
+    return {
+      search: "",
+    };
   },
   methods: {
     ...mapActions(["createOneToOneConversation"]),
+
     openConversation() {
       let promise = this.createOneToOneConversation("Alice");
 
@@ -53,17 +56,21 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["users"])
+    ...mapGetters(["users"]),
+    filteredUsers: function() {
+      var u = [];
+      if(this.users !== null){
+        this.users.forEach(element => {
+        if(element.username.toLowerCase().includes(this.search.toLowerCase()))
+        {
+          u.push(element);
+        }
+      });
+      }
+    return u
+    },
   }
 };
 </script>
 
 <style src="./Community.css" scoped />
-
-      });
-    }
-  },
-  computed: {
-    ...mapGetters(["users"])
-  }
-};
