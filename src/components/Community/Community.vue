@@ -52,28 +52,20 @@ export default {
     openConversation() {
       let promise;
       console.log(this.selectedUsers)
-      //cas aucun utilisateur sélectionnés
-      //cas aucun utilisateur sélectionnés
-      //cas aucun utilisateur sélectionnés
-      //cas aucun utilisateur sélectionnés
-      //cas aucun utilisateur sélectionnés
-      //cas aucun utilisateur sélectionnés
-      if(this.selectedUsers !== null){
-        if(this.selectedUsers.length>1)
-        {
-          promise=this.createManyToManyConversation(this.selectedUsers);
-        }
-        else
-        {
-          promise=this.createOneToOneConversation(this.selectedUsers[0]);
-        }
-      
-        this.messageBouton = "Ouverture de la conversation...";
-        this.selectedUsers = [];
-        promise.finally(() => {
-          console.log("Conversation ouverte !");
-        });
+      if(this.selectedUsers.length>1)
+      {
+        promise=this.createManyToManyConversation(this.selectedUsers);
       }
+      else
+      {
+         promise=this.createOneToOneConversation(this.selectedUsers[0]);
+      }
+      
+      this.messageBouton = "Ouverture de la conversation...";
+      this.selectedUsers = [];
+      promise.finally(() => {
+        console.log("Conversation ouverte !");
+      });
     },
 
      toggleSelected(username) {

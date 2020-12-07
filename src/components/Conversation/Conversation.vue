@@ -8,6 +8,7 @@
       <div class="avatar">
         <i class="ui users icon"></i>
       </div>
+
       <div class="title">
         <div class="ui compact">
           <i class="icon circle"></i>
