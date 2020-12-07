@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="users">
-      <div class="user" v-for="user in filteredUsers" :key="user.token">
+      <div class="user" v-for="user in filteredUsers" :key="user.token" @click="">
         <img :src="user.picture_url" /><span
           class=""
           >{{ user.username }}</span
@@ -42,6 +42,7 @@ export default {
   data() {
     return {
       search: "",
+      selectedUsers: []
     };
   },
   methods: {
@@ -69,6 +70,7 @@ export default {
       }
     return u
     },
+
   }
 };
 </script>
