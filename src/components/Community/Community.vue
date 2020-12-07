@@ -27,7 +27,7 @@
       <button class="ui primary big button" @click="openConversation">
         <i class="conversation icon"></i>
         <span>
-          Ouvrir la conversation
+          {{ messageBouton }}
         </span>
       </button>
     </div>
@@ -42,7 +42,8 @@ export default {
   data() {
     return {
       search: "",
-      selectedUsers: []
+      selectedUsers: [],
+      messageBouton: "Ouvrir la conversation (0)",
     };
   },
   methods: {
@@ -60,7 +61,8 @@ export default {
          promise=this.createOneToOneConversation(this.selectedUsers[0]);
       }
       
-
+      this.messageBouton = "Ouverture de la conversation...";
+      this.selectedUsers = [];
       promise.finally(() => {
         console.log("Conversation ouverte !");
       });
@@ -78,6 +80,7 @@ export default {
           this.selectedUsers.splice(index, 1);
         }
       }
+      this.messageBouton = "Ouvrir la conversation (" + this.selectedUsers.length + ")";
     },
 
   },
