@@ -34,6 +34,12 @@
         <br />
         <span>Messages</span>
       </div>
+       <div v-if="true" class="blue button" @click="openInfos">
+        
+        <br />
+        <span>Infos</span>
+      </div>
+
     </div>
     <div class="conversations">
       <div class="conversation-search">
@@ -129,6 +135,9 @@ export default {
     ...mapActions(["deauthenticate"]),
     openCommunity() {
       router.push({ name: "Community" });
+    },
+    openInfos() {
+      router.push({ name: "Informations" });
     },
     openMessageSearch() {
       router.push({ name: "Search" });
