@@ -105,7 +105,6 @@ export default {
       this.conversations.forEach(element => {
         convs.push({ updated_at: element.updated_at.substring(11, 19), id: element.id, participants: element.participants[0] + ", " + element.participants[1], message: element.message });
       });
-
       return convs;
     }
   }
