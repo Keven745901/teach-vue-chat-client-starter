@@ -52,8 +52,10 @@
           <img src="https://source.unsplash.com/FUcupae92P4/100x100" />
         </a>
         <div class="content">
-          <div class="metadata">
-            <div class="title">Derek</div>
+         <div class="metadata">
+            <div>{{c.participants}}</div>
+            <div>{{c.updated_at}}</div>
+            <div>{{c.message}}</div>
             <span class="time">01:48:00</span>
           </div>
           <div class="text">Nouvelle conversation</div>
