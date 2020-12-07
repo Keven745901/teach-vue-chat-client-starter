@@ -61,6 +61,10 @@ export default new Vuex.Store({
       state.users = users;
     },
 
+    setConversations(state, conversations) {
+      state.conversations = conversations;
+    },
+
     upsertUser(state, { user }) {
       const localUserIndex = state.users.findIndex(
         (_user) => _user.username === user.username
@@ -76,7 +80,7 @@ export default new Vuex.Store({
     },
 
     upsertConversation(state, { conversation }) {
-      //TODO
+      state.conversations.push({ conversation });
     }
   },
   actions: {
@@ -109,12 +113,18 @@ export default new Vuex.Store({
 
     initializeAfterAuthentication({ dispatch }) {
       dispatch("fetchUsers");
-      //TODO: dispatch("fetchConversations");
+      dispatch("fetchConversations");
     },
 
     fetchUsers({ commit }) {
       Vue.prototype.$client.getUsers().then(({ users }) => {
         commit("setUsers", users);
+      });
+    },
+
+    fetchConversations({ commit }) {
+      Vue.prototype.$client.getConversations().then(({ conversations }) => {
+        commit("setConversations", conversations);
       });
     },
 
@@ -124,9 +134,9 @@ export default new Vuex.Store({
       );
 
       promise.then(({ conversation }) => {
-        // commit("upsertConversation", {
-        //   conversation
-        // });
+        commit("upsertConversation", {
+          conversation
+        });
         console.log(conversation);
         router.push({
           name: "Conversation",
