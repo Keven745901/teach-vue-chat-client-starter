@@ -25,6 +25,7 @@ export default new Vuex.Store({
       return state.user.token !== null;
     },
     user(state) {
+      console.log("George ", state.user);
       return state.user;
     },
     users(state) {
@@ -38,15 +39,21 @@ export default new Vuex.Store({
         return {
           //...conversation
           //TODO
-          updated_at: (conversation.updated_at || "").substring(11, 19),
+          updated_at: new Date(conversation.updated_at).toLocaleTimeString(),
           id: conversation.id,
-          participants: conversation.participants.join(", "),
+          participants: conversation.participants,
           message: conversation.message
         };
       });
     },
-    conversation(state, getters) {
+    conversation(state, currentConversationId) {
       //TODO
+      console.log(state.conversations);
+      if (state.conversations !== null) {
+        return state.conversations.find(
+          (element) => element.id === state.currentConversationId
+        );
+      }
     }
   },
   mutations: {
