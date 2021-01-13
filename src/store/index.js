@@ -36,8 +36,12 @@ export default new Vuex.Store({
     conversations(state) {
       return state.conversations.map((conversation) => {
         return {
-          ...conversation
+          //...conversation
           //TODO
+          updated_at: (conversation.updated_at || "").substring(11, 19),
+          id: conversation.id,
+          participants: conversation.participants.join(", "),
+          message: conversation.message
         };
       });
     },

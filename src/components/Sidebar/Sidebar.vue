@@ -43,7 +43,7 @@
     </div>
     <div class="conversations">
       <div
-      v-for="c in listeConversations" :key="c.id"
+      v-for="c in conversations" :key="c.id"
         class="conversation selected"
         :title="c.title"
         @click="openConversation(c.id)"
@@ -73,7 +73,6 @@ export default {
     return {
       search: "",
       nomsConversation: [],
-      search: ""
     };
   },
   methods: {
@@ -100,13 +99,13 @@ export default {
   },
   computed: {
     ...mapGetters(["user", "conversations"]),
-    listeConversations: function(){
-      var convs = [];
-      this.conversations.forEach(element => {
-        convs.push({ updated_at: element.updated_at.substring(11, 19), id: element.id, participants: element.participants[0] + ", " + element.participants[1], message: element.message });
-      });
-      return convs;
-    }
+    // listeConversations: function(){
+
+    //   return this.conversations.map(element => {
+
+    //     return { updated_at: (element.updated_at || "").substring(11, 19), id: element.id, participants: element.participants.join(", "), message: element.message };
+    //   });
+    // }
   }
 };
 </script>
